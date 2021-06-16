@@ -1,0 +1,25 @@
+.header{
+  background-color:#20B2AA;
+  height: 80px;
+  display:flex;
+  align-items: center;
+  border-radius: 10px;
+}
+.controls{
+  margin-left:auto;
+  align-items: center;
+  margin-right: 50px;
+}
+.logo{
+  width:100px;
+  height: 100px;
+  margin-left: 50px;
+}
+.btn{
+  background-color:#808080;
+  color:#fff;
+  height: 50px;
+  width: 75px;
+  border-radius:15px;
+  border:none;
+}
