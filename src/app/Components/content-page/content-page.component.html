@@ -8,8 +8,10 @@
   <div>
     <app-organaiser></app-organaiser>
   </div>
-  <a class="btn-add">
-    <img src="/assets/images/btn_add.png"  alt="">
-  </a>
+  <div *ngIf="taskService.isWindow" class="model_wrap">
+    <app-modal-window> </app-modal-window>
+  </div>
+
+  <button class="btn-add" (click)="showWindow()">Add</button>
 </div>
 

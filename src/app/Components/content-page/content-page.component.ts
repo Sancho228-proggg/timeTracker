@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from "../../Shared/services/data.service";
+import {TaskService} from "../../Shared/services/task.service";
 
 @Component({
   selector: 'app-content-page',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./content-page.component.scss']
 })
 export class ContentPageComponent implements OnInit {
-
-  constructor() { }
+  constructor(private dataService:DataService,
+              public taskService:TaskService
+              ) { }
 
   ngOnInit(): void {
+  }
+
+  showWindow(){
+    this.taskService.showWindow();
   }
 
 }

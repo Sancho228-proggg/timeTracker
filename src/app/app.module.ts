@@ -11,6 +11,10 @@ import { SelectorComponent } from './Components/selector/selector.component';
 import { ContentPageComponent } from './Components/content-page/content-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MomentPipe} from "./Shared/moment.pipe";
+import { ModalWindowComponent } from './Components/modal-window/modal-window.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {AuthGuard} from "./Shared/auth.guard";
 
 
 
@@ -23,14 +27,18 @@ import {MomentPipe} from "./Shared/moment.pipe";
     CalendarComponent,
     SelectorComponent,
     ContentPageComponent,
-    MomentPipe
+    MomentPipe,
+    ModalWindowComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

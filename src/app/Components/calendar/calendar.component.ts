@@ -30,9 +30,9 @@ export class CalendarComponent implements OnInit {
 
   generate(now:moment.Moment){
     const startDay=now.clone().startOf('month').startOf('week');
-    const endDay=now.clone().endOf('month').endOf('week');
+    const endDay=now.clone().endOf('month').endOf('week').endOf('day');
     let date=startDay.clone();
-    const calendar:Week[]=[];
+    const calendar=[];
 
     while(date.isBefore(endDay,'day')){
       calendar.push({
@@ -48,11 +48,12 @@ export class CalendarComponent implements OnInit {
             }
           })
       })
-
-
     }
-
     this.calendar=calendar;
+  }
+
+  select(day:moment.Moment):void{
+    this.dataService.changeDay(day)
   }
 
 }

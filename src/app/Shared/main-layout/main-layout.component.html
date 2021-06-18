@@ -3,12 +3,15 @@
     <img src="/assets/images/logo.png" class="logo" alt="">
   </div>
 
-  <div class="controls">
-    <button class="btn">Sign in</button>
+  <div class="controls" *ngIf="!auth.isAuth();else userinfo">
+    <button class="btn" routerLink="/login">Sign in</button>
     <button class="btn">Sign Up</button>
   </div>
-<!--  <div class="userInfo">-->
-<!--    <p>lalalalalala</p>-->
-<!--    <button>Logout</button>-->
-<!--  </div>-->
+  <ng-template #userinfo>
+    <div class="userInfo">
+      <p>{{auth.activeUser}}</p>
+      <button class="btn" (click)="logout($event)">Logout</button>
+    </div>
+  </ng-template>
+
 </div>
