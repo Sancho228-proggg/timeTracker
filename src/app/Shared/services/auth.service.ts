@@ -8,7 +8,6 @@ import {catchError, tap} from "rxjs/operators";
 @Injectable({providedIn:'root'})
 
 export class AuthService {
-  activeUser:string='';
   get token(){
     const exprDate=localStorage.getItem('fb-token-exp')
     if(+(new Date())>Number(exprDate)){
@@ -21,10 +20,22 @@ export class AuthService {
   constructor(private http:HttpClient) {
 
   }
-  login(user:User):Observable<any>{
+
+
+  get getActiveUser():string|null{
+    const activeUser=localStorage.getItem('active-user');
+    return activeUser;
+  }
+  get getLoaclaId():string|null{
+    const localId=localStorage.getItem('local-id');
+    console.log(localId);
+    return localId;
+  }
+
+
+  login(user:User):Observable<User>{
     user.returnSecureToken=true;
-    this.activeUser=user.email;
-    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,user)
+    return this.http.post<User>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,user)
       .pipe(
         tap(this.setToken?this.setToken:console.error),
         catchError(this.handleError.bind(this))
@@ -41,7 +52,12 @@ export class AuthService {
     if(response){
       const exprDate=new Date(( Date.now()+ +response.expiresIn*1000));
       localStorage.setItem('fb-token',response.idToken);
-      localStorage.setItem('fb-token-exp',exprDate.toString())
+      localStorage.setItem('fb-token-exp',exprDate.toString());
+      localStorage.setItem('active-user',response.email||'');
+      localStorage.setItem('local-id',response.localId||'');
+
+
+      console.log(response);
     }else{
       localStorage.clear();
     }

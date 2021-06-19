@@ -1,13 +1,8 @@
 <div class="task_container">
   <ul>
-    <li>
-      <div class="task_time">4</div>
-      <div class="task_text">Styding</div>
+    <li *ngFor="let task of tasks">
+      <div class="task_time">{{task.time}}</div>
+      <div class="task_text">{{task.text}}</div>
     </li>
-    <li>
-      <div class="task_time">2</div>
-      <div class="task_text">Sport</div>
-    </li>
-
   </ul>
 </div>

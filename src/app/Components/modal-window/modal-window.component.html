@@ -1,3 +1,25 @@
-<form >
+<form class="card card_model" [formGroup]="form" (ngSubmit)="submit()">
 
+  <div class="form-control" [ngClass]="{invalid:form.controls['time'].touched && form.controls['time'].invalid}">
+    <label for="time">Time</label>
+    <input id="time" type="text" formControlName="time">
+    <div
+      *ngIf="form.controls['time'].touched && form.controls['time'].invalid"
+      class="validation">
+      <small *ngIf="form.controls['time'].errors?.required"> Поле time является обязательным</small>
+    </div>
+  </div>
+
+  <div class="form-control" [ngClass]="{invalid:form.controls['text'].touched && form.controls['text'].invalid}">
+    <label for="text">Text</label>
+    <input id="text" type="text" formControlName="text">
+    <div class="validation" *ngIf="form.controls['text'].touched && form.controls['text'].invalid">
+      <small>Поле text является обязательным</small>
+    </div>
+  </div>
+
+  <button class="btn"
+          type="submit"
+          [disabled]="form.invalid"
+  >Добавить</button>
 </form>

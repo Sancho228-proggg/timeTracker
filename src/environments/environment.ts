@@ -6,7 +6,8 @@ import {Environment} from "./interface";
 
 export const environment:Environment = {
   production: false,
-  apiKey:'AIzaSyDCmYvEPhUYT74-2biOUDejwv79cATuBBE'
+  apiKey:'AIzaSyDCmYvEPhUYT74-2biOUDejwv79cATuBBE',
+  fbDbUrl:'https://timetracker-9a2f1-default-rtdb.firebaseio.com'
 };
 
 /*

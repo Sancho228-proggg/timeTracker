@@ -9,7 +9,7 @@
   </div>
   <ng-template #userinfo>
     <div class="userInfo">
-      <p>{{auth.activeUser}}</p>
+      <p>{{auth.getActiveUser}}</p>
       <button class="btn" (click)="logout($event)">Logout</button>
     </div>
   </ng-template>

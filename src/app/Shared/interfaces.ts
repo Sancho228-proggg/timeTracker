@@ -5,13 +5,16 @@ export interface User{
 }
 export interface FbAuthResponse{
   idToken:string,
-  expiresIn:string
+  expiresIn:string,
+  localId?:string,
+  email?:string
 }
 
 export interface Task{
   id?:string,
+  time:string,
   text:string,
-  date?:string
+  date:string
 }
 
 export interface FbCreateResponse{
