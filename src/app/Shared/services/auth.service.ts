@@ -41,6 +41,14 @@ export class AuthService {
         catchError(this.handleError.bind(this))
       )
   }
+  signUp(user:User):Observable<User>{
+    user.returnSecureToken=true;
+    return this.http.post<User>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`,user)
+      .pipe(
+        tap(this.setToken?this.setToken:console.error),
+        catchError(this.handleError.bind(this))
+      )
+  }
   logout(){
     this.setToken(null);
   }

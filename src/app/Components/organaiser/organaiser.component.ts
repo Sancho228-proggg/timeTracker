@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from "../../Shared/services/task.service";
 import {DataService} from "../../Shared/services/data.service";
 import {switchMap} from "rxjs/operators";
+import {Task} from "../../Shared/interfaces";
 
 @Component({
   selector: 'app-organaiser',
@@ -9,7 +10,7 @@ import {switchMap} from "rxjs/operators";
   styleUrls: ['./organaiser.component.scss']
 })
 export class OrganaiserComponent implements OnInit {
-  tasks:any=[];
+  tasks:Task[]=[];
   constructor(
     private taskService:TaskService,
     private dataService:DataService

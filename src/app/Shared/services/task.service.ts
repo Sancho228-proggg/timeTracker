@@ -17,7 +17,7 @@ export class TaskService{
     ) {
   }
   isWindow:boolean=false;
-  showWindow(){
+  showWindow():void{
     this.isWindow=!this.isWindow;
   }
   create(task:Task):Observable<Task>{
@@ -29,14 +29,15 @@ export class TaskService{
         })
       )
   }
-  getTasks(date:moment.Moment):any{
+  getTasks(date:moment.Moment):Observable<Task[]>{
     const id=this.auth.getLoaclaId;
-    return this.http.get<any>(`${environment.fbDbUrl}/tasks/${id}/${date.format('DD-MM-YYYY')}.json`)
+    return this.http.get<Task[]>(`${environment.fbDbUrl}/tasks/${id}/${date.format('DD-MM-YYYY')}.json`)
       .pipe(
         map((tasks)=>{
           if(!tasks){
             return [];
           }else{
+            // @ts-ignore
             return Object.keys(tasks).map((key)=>({...tasks[key],id:key}));
           }
         })

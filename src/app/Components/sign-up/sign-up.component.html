@@ -1,6 +1,6 @@
 <form class='card' [formGroup]="form" (ngSubmit)="submit()">
   <h2>
-    Sign In
+    Sign Up
   </h2>
   <div class="alert" *ngIf="authService.error$|async as error">
     {{error}}
@@ -31,5 +31,6 @@
   <button class="btn"
           type="submit"
           [disabled]="form.invalid||isSumbitted"
-  >Sign In</button>
+  >Sign Up</button>
 </form>
+

@@ -15,6 +15,8 @@ import { ModalWindowComponent } from './Components/modal-window/modal-window.com
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthGuard} from "./Shared/auth.guard";
+import { SignUpComponent } from './Components/sign-up/sign-up.component';
+
 
 
 
@@ -28,7 +30,9 @@ import {AuthGuard} from "./Shared/auth.guard";
     SelectorComponent,
     ContentPageComponent,
     MomentPipe,
-    ModalWindowComponent
+    ModalWindowComponent,
+    SignUpComponent,
+
   ],
   imports: [
     BrowserModule,
