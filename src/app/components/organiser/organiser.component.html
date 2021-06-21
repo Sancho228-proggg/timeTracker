@@ -1,7 +1,7 @@
 <div class="task_container" *ngIf="tasks$|async as tasks">
   <ul>
     <li *ngFor="let task of tasks">
-      <div class="task_time">{{task.time}}</div>
+      <div class="task_time">{{task.time}} h.</div>
       <div class="task_text">{{task.text}}</div>
       <button class="btn delete" (click)="remove(task.date,task.id?task.id:'')">X</button>
     </li>

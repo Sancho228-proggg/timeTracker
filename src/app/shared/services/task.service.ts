@@ -1,12 +1,13 @@
 import {Injectable} from "@angular/core";
-import {FbCreateResponse, Task} from "../interfaces";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
+import * as moment from 'moment';
+
+import {FbCreateResponse,Task} from "../interfaces";
 import {environment} from "../../../environments/environment";
 import {AuthService} from "./auth.service";
 import {DataService} from "./data.service";
-import {map} from "rxjs/operators";
-import * as moment from 'moment';
 
 @Injectable({providedIn:'root'})
 export class TaskService{
@@ -46,5 +47,8 @@ export class TaskService{
   remove(date:string,tasksId:string):Observable<void>{
     const id=this.auth.getLoaclaId;
     return this.http.delete<void>(`${environment.fbDbUrl}/tasks/${id}/${date}/${tasksId}.json`);
+  }
+  check(taskTimes:string []):number{
+    return taskTimes.map(el=>Number(el)).reduce((predval,val,array)=>predval+val,0);
   }
 }

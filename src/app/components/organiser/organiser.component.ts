@@ -1,16 +1,19 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {TaskService} from "../../Shared/services/task.service";
-import {DataService} from "../../Shared/services/data.service";
-import {switchMap} from "rxjs/operators";
-import {Task} from "../../Shared/interfaces";
 import {Observable, Subscription} from "rxjs";
+import {switchMap} from "rxjs/operators";
+
+
+import {TaskService} from "../../shared/services/task.service";
+import {DataService} from "../../shared/services/data.service";
+import {Task} from "../../shared/interfaces";
+
 
 @Component({
-  selector: 'app-organaiser',
-  templateUrl: './organaiser.component.html',
-  styleUrls: ['./organaiser.component.scss']
+  selector: 'app-organiser',
+  templateUrl: './organiser.component.html',
+  styleUrls: ['./organiser.component.scss']
 })
-export class OrganaiserComponent implements OnInit,OnDestroy {
+export class OrganiserComponent implements OnInit,OnDestroy {
 
   tasks$:Observable<Task[]>
   removeSub:Subscription;
@@ -28,7 +31,9 @@ export class OrganaiserComponent implements OnInit,OnDestroy {
     )
   }
   ngOnDestroy() {
-    this.removeSub.unsubscribe();
+    if(this.removeSub) {
+      this.removeSub.unsubscribe();
+    }
   }
 
   remove(date:string,tasksId:string){

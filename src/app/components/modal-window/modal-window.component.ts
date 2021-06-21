@@ -1,11 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TaskService} from "../../Shared/services/task.service";
-import {AuthService} from "../../Shared/services/auth.service";
-import {DataService} from "../../Shared/services/data.service";
 import {switchMap} from "rxjs/operators";
 import {Subscription} from "rxjs";
-import {AlertService} from "../../Shared/services/alert.service";
+
+
+import {TaskService} from "../../shared/services/task.service";
+import {AuthService} from "../../shared/services/auth.service";
+import {DataService} from "../../shared/services/data.service";
+import {AlertService} from "../../shared/services/alert.service";
 
 @Component({
   selector: 'app-modal-window',
@@ -45,7 +47,7 @@ export class ModalWindowComponent implements OnInit,OnDestroy {
       date:this.dataService.date$.value.format('DD-MM-YYYY')
     }
     this.taskTimes.push(this.form.value.time);
-    const allTime:number=this.taskTimes.map(el=>Number(el)).reduce((predval,val,array)=>predval+val,0);
+    const allTime:number=this.taskService.check(this.taskTimes);
     if(allTime<24){
     this.taskService.create(task).subscribe(()=>{
       this.form.reset();

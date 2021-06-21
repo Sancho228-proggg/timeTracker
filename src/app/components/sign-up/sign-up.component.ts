@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../Shared/services/auth.service";
+
+
+
+import {AuthService} from "../../shared/services/auth.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {User} from "../../Shared/interfaces";
-import {AlertService} from "../../Shared/services/alert.service";
+import {User} from "../../shared/interfaces";
+import {AlertService} from "../../shared/services/alert.service";
 
 @Component({
   selector: 'app-sign-up',

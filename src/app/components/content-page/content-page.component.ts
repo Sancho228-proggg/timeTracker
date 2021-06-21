@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from "../../Shared/services/data.service";
-import {TaskService} from "../../Shared/services/task.service";
+
+
+import {DataService} from "../../shared/services/data.service";
+import {TaskService} from "../../shared/services/task.service";
 
 @Component({
   selector: 'app-content-page',

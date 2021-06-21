@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 
 
-import {DataService} from "../../Shared/services/data.service";
+import {DataService} from "../../shared/services/data.service";
 
 
 interface Day{
