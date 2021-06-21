@@ -26,7 +26,7 @@ export class OrganiserComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    this.tasks$=this.dataService.date$.pipe(
+       this.tasks$=this.dataService.date$.pipe(
       switchMap(val=>this.taskService.getTasks(val))
     )
   }
@@ -38,6 +38,6 @@ export class OrganiserComponent implements OnInit,OnDestroy {
 
   remove(date:string,tasksId:string){
    this.removeSub=this.taskService.remove(date,tasksId).subscribe();
-  }
+   }
 
 }
