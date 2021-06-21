@@ -16,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthGuard} from "./Shared/auth.guard";
 import { SignUpComponent } from './Components/sign-up/sign-up.component';
+import { AlertComponent } from './Shared/alert/alert.component';
 
 
 
@@ -32,6 +33,7 @@ import { SignUpComponent } from './Components/sign-up/sign-up.component';
     MomentPipe,
     ModalWindowComponent,
     SignUpComponent,
+    AlertComponent,
 
   ],
   imports: [

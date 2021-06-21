@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../Shared/services/auth.service";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {User} from "../../Shared/interfaces";
+import {AlertService} from "../../Shared/services/alert.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +18,9 @@ export class SignUpComponent implements OnInit {
   constructor(
     public authService:AuthService,
     private router:Router,
-    private route:ActivatedRoute
+    private route:ActivatedRoute,
+    private alert:AlertService
+
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +51,7 @@ export class SignUpComponent implements OnInit {
 
     this.authService.signUp(user).subscribe(()=>{
       this.form.reset();
+      this.alert.success('Вы успешно зарегистрировались');
       this.router.navigate(['/contentPage']);
       this.isSumbitted=false;
     },()=>{this.isSumbitted=false;})

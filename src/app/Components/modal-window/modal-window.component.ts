@@ -5,6 +5,7 @@ import {AuthService} from "../../Shared/services/auth.service";
 import {DataService} from "../../Shared/services/data.service";
 import {switchMap} from "rxjs/operators";
 import {Subscription} from "rxjs";
+import {AlertService} from "../../Shared/services/alert.service";
 
 @Component({
   selector: 'app-modal-window',
@@ -18,7 +19,8 @@ export class ModalWindowComponent implements OnInit,OnDestroy {
   constructor(
     private taskService:TaskService,
     private auth:AuthService,
-    private dataService:DataService
+    private dataService:DataService,
+    private alert:AlertService
   ) { }
 
   ngOnInit(): void {
@@ -49,9 +51,11 @@ export class ModalWindowComponent implements OnInit,OnDestroy {
       this.form.reset();
     })
       this.taskService.showWindow();
+      this.alert.success('Задание было успешно добавлено');
     }
     else{
       this.taskService.showWindow();
+      this.alert.danger('Количество общих часов на день превышает 24');
       this.form.reset();
     }
 

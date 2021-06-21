@@ -1,4 +1,4 @@
-<div class="task_container">
+<div class="task_container" *ngIf="tasks$|async as tasks">
   <ul>
     <li *ngFor="let task of tasks">
       <div class="task_time">{{task.time}}</div>

@@ -60,11 +60,21 @@ input{
 
   }
 }
-.alert{
-  width: 400px;
-  border: 1px dotted white;
-  font-weight: bold;
-  margin-bottom: 10px;
+.alert {
+  padding: 0.7rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: #f4f4f4;
+  color: #333;
+}
+.alert-success{
+  background:  #28a745;
+  color: #fff;
+}
+
+.alert-danger{
+  background:  #FF0000;
+  color: #fff;
 }
 .validation{
   font-weight: bold;
