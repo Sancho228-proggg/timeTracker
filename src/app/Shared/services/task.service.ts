@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {AuthService} from "./auth.service";
 import {DataService} from "./data.service";
-import {map, tap} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import * as moment from 'moment';
 
 @Injectable({providedIn:'root'})
@@ -42,5 +42,9 @@ export class TaskService{
           }
         })
       )
+  }
+  remove(date:string,tasksId:string):Observable<void>{
+    const id=this.auth.getLoaclaId;
+    return this.http.delete<void>(`${environment.fbDbUrl}/tasks/${id}/${date}/${tasksId}.json`);
   }
 }
