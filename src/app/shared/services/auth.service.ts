@@ -10,10 +10,13 @@ import {environment} from "../../../environments/environment";
 @Injectable({providedIn:'root'})
 
 export class AuthService {
+
+
   get token(){
     const exprDate=localStorage.getItem('fb-token-exp')
     if(+(new Date())>Number(exprDate)){
-      this.logout()
+      this.logout();
+
       return null;
     }
     return localStorage.getItem('fb-token')
@@ -30,7 +33,6 @@ export class AuthService {
   }
   get getLoaclaId():string|null{
     const localId=localStorage.getItem('local-id');
-    console.log(localId);
     return localId;
   }
 
@@ -65,9 +67,6 @@ export class AuthService {
       localStorage.setItem('fb-token-exp',exprDate.toString());
       localStorage.setItem('active-user',response.email||'');
       localStorage.setItem('local-id',response.localId||'');
-
-
-      console.log(response);
     }else{
       localStorage.clear();
     }

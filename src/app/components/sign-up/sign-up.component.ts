@@ -32,9 +32,6 @@ export class SignUpComponent implements OnInit {
       if(params['loginAgain']){
         this.message='Пожалуйста, введите данные'
       }
-      else if(params['authFailed']){
-        this.message="Сессия истекла, введите данные"
-      }
     })
 
     this.form=new FormGroup({

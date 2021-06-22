@@ -7,14 +7,13 @@ import * as moment from 'moment';
 import {FbCreateResponse,Task} from "../interfaces";
 import {environment} from "../../../environments/environment";
 import {AuthService} from "./auth.service";
-import {DataService} from "./data.service";
+
 
 @Injectable({providedIn:'root'})
 export class TaskService{
   constructor(
     private http:HttpClient,
-    private auth:AuthService,
-    private dataService:DataService
+    private auth:AuthService
     ) {
   }
   isWindow:boolean=false;

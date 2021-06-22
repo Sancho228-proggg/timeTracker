@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import {DataService} from "../../shared/services/data.service";
 import {TaskService} from "../../shared/services/task.service";
 
 @Component({
@@ -10,7 +9,7 @@ import {TaskService} from "../../shared/services/task.service";
   styleUrls: ['./content-page.component.scss']
 })
 export class ContentPageComponent implements OnInit {
-  constructor(private dataService:DataService,
+  constructor(
               public taskService:TaskService
               ) { }
 

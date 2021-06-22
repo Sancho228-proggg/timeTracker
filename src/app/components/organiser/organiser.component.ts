@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {switchMap} from "rxjs/operators";
 
@@ -6,13 +6,14 @@ import {switchMap} from "rxjs/operators";
 import {TaskService} from "../../shared/services/task.service";
 import {DataService} from "../../shared/services/data.service";
 import {Task} from "../../shared/interfaces";
+import {AlertService} from "../../shared/services/alert.service";
 
 
 @Component({
   selector: 'app-organiser',
   templateUrl: './organiser.component.html',
-  styleUrls: ['./organiser.component.scss']
-})
+  styleUrls: ['./organiser.component.scss'],
+  })
 export class OrganiserComponent implements OnInit,OnDestroy {
 
   tasks$:Observable<Task[]>
@@ -20,7 +21,8 @@ export class OrganiserComponent implements OnInit,OnDestroy {
   constructor(
     private taskService:TaskService,
     private dataService:DataService,
-    public cd: ChangeDetectorRef
+    private alert:AlertService
+
   ) {
 
   }
@@ -38,6 +40,7 @@ export class OrganiserComponent implements OnInit,OnDestroy {
 
   remove(date:string,tasksId:string){
    this.removeSub=this.taskService.remove(date,tasksId).subscribe();
+   this.alert.success('Задание было удалено');
    }
 
 }

@@ -48,7 +48,7 @@ export class ModalWindowComponent implements OnInit,OnDestroy {
     }
     this.taskTimes.push(this.form.value.time);
     const allTime:number=this.taskService.check(this.taskTimes);
-    if(allTime<24){
+    if(allTime<=24){
     this.taskService.create(task).subscribe(()=>{
       this.form.reset();
     })
