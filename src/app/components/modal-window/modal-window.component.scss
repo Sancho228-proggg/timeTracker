@@ -8,3 +8,14 @@ input{
   color:#7B68EE;
   background-color: white;
 }
+.btn_close{
+  border:none;
+  background: #ffffff;
+  margin-left: auto;
+  width: 5px;
+  display: block;
+  &:hover{
+    color: red;
+    cursor:pointer;
+  }
+}

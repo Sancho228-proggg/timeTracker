@@ -6,12 +6,12 @@
     <app-calendar></app-calendar>
   </main>
   <div>
-    <app-organiser></app-organiser>
+    <app-organiser [task]="task" (onRemove)="remove($event)"></app-organiser>
   </div>
   <div *ngIf="taskService.isWindow" class="model_wrap">
-    <app-modal-window> </app-modal-window>
+    <app-modal-window [task]="task" (onCreate)="create($event)"> </app-modal-window>
   </div>
 
-  <button class="btn-add" (click)="showWindow()">Add</button>
+  <button class="btn-add" (click)="togleWindow()">Add</button>
 </div>
 

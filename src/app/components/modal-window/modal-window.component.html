@@ -1,5 +1,5 @@
 <form class="card card_model" [formGroup]="form" (ngSubmit)="submit()">
-
+  <button class="btn_close" (click)="close()">X</button>
   <div class="form-control" [ngClass]="{invalid:form.controls['time'].touched && form.controls['time'].invalid}">
     <label for="time">Time</label>
     <input id="time" type="number" formControlName="time">

@@ -52,8 +52,11 @@ export class CalendarComponent implements OnInit {
     this.calendar=calendar;
   }
 
-  select(day:moment.Moment):void{
-    this.dataService.changeDay(day)
+  select(day:Day):void{
+    if(day.selected){
+      return;
+    }
+    this.dataService.changeDay(day.value);
   }
 
 }

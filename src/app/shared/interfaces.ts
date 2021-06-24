@@ -9,6 +9,12 @@ export interface FbAuthResponse{
   localId?:string,
   email?:string
 }
+export interface FbUserResponce{
+  users:VerifiableUser[]
+}
+export interface VerifiableUser{
+  localId:string
+}
 
 export interface Task{
   id?:string,

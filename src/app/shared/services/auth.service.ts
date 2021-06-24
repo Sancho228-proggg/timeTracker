@@ -1,10 +1,11 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, Subject, throwError} from "rxjs";
-import {catchError, tap} from "rxjs/operators";
+import {catchError, map, tap} from "rxjs/operators";
 
-import {FbAuthResponse, User} from "../interfaces";
+import {FbAuthResponse, FbUserResponce, User} from "../interfaces";
 import {environment} from "../../../environments/environment";
+
 
 
 @Injectable({providedIn:'root'})
@@ -83,9 +84,24 @@ export class AuthService {
       case 'INVALID_PASSWORD':
         this.error$.next('Неверный пароль')
         break;
+      case 'EMAIL_EXISTS':
+        this.error$.next('Email занят')
+        break;
 
     }
     return throwError(error)
 
+  }
+
+  getUserInfo(){
+
+    return this.http.post<FbUserResponce>(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${environment.apiKey}`,{idToken:this.token})
+      .pipe(
+        map((val)=>{
+          const user=val['users'][0];
+         return user;
+        }),
+        catchError(this.handleError.bind(this))
+      )
   }
 }
