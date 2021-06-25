@@ -15,10 +15,10 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { SelectorComponent } from './components/selector/selector.component';
 import { ContentPageComponent } from './components/content-page/content-page.component';
 import {AuthGuard} from "./shared/auth.guard";
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import {MomentPipe} from "./shared/moment.pipe";
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+
 
 
 
@@ -34,8 +34,8 @@ import { ModalWindowComponent } from './components/modal-window/modal-window.com
     ContentPageComponent,
     MomentPipe,
     ModalWindowComponent,
-    SignUpComponent,
     AlertComponent,
+
 
   ],
   imports: [

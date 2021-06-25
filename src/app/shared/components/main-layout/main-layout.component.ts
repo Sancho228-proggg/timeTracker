@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
 import {AuthService} from "../../services/auth.service";
@@ -11,16 +11,18 @@ import {AuthService} from "../../services/auth.service";
 export class MainLayoutComponent implements OnInit {
 
   constructor(
-    public auth:AuthService,
-    private route:Router,
-  ) { }
+    public auth: AuthService,
+    private route: Router,
+  ) {
+  }
 
   ngOnInit(): void {
 
   }
-  logout(event:Event){
+
+  logout(event: Event) {
     event.preventDefault();
     this.auth.logout();
-    this.route.navigate(['/','login']);
+    this.route.navigate(['authorization', 'signin']);
   }
 }

@@ -5,8 +5,8 @@
   </div>
 
   <div class="controls" *ngIf="!auth.isAuth();else userinfo">
-    <button class="btn" routerLink="/login">Sign in</button>
-    <button class="btn" routerLink="/signup">Sign Up</button>
+    <button class="btn" [routerLink]="['authorization', 'signin']">Sign in</button>
+    <button class="btn" [routerLink]="['authorization', 'signup']">Sign Up</button>
   </div>
   <ng-template #userinfo>
     <div class="userInfo">

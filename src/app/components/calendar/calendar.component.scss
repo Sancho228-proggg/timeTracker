@@ -7,16 +7,20 @@ table {
 td {
   text-align: center;
   cursor: pointer;
-  &.disabled{
-    opacity:50%;
+
+  &.disabled {
+    opacity: 50%;
   }
 }
-.active{
+
+.active {
   font-weight: bold;
-  color:red;
+  color: red;
   font-size: 25px;
 }
-.selected{
-  color:black;
+
+.selected {
+  color: black;
 }
+
 

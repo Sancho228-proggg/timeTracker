@@ -1,13 +1,11 @@
-import {Observable} from 'rxjs';
+import {Observable, zip} from 'rxjs';
 import {Injectable} from "@angular/core";
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
 import {AuthService} from "./services/auth.service";
-import {TaskService} from "./services/task.service";
-import {VerifiableUser} from "./interfaces";
+import {tap} from "rxjs/operators";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  verifiableUser: VerifiableUser;
 
   constructor(
     private auth: AuthService,
@@ -16,38 +14,25 @@ export class AuthGuard implements CanActivate {
 
   }
 
-  checkAuth(): boolean {
-    this.auth.getUserInfo().subscribe(
-      (val) => {
-        this.verifiableUser = val;
-      }
-    )
-    const localId = localStorage.getItem('local-id');
-    if (this.verifiableUser) {
-      if (localId === this.verifiableUser.localId) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    return false;
+  checkAuth():Observable<boolean>{
+   return this.auth.getAuthInfo()
   }
 
 
   canActivate(
     route: ActivatedRouteSnapshot, state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-
-    if (this.auth.isAuth() && this.checkAuth()) {
-      return true;
-    } else {
-      this.auth.logout()
-      this.router.navigate(['/', 'login'], {
-        queryParams: {
-          loginAgain: true
-        }
-      })
-      return false;
-    }
+   return this.checkAuth().pipe(
+     tap(val => {
+       if (!val) {
+         this.auth.logout()
+         this.router.navigate(['authorization', 'signin'], {
+           queryParams: {
+             loginAgain: true
+           }
+         })
+       }
+     })
+   )
   }
 }

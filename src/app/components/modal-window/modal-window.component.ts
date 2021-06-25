@@ -1,12 +1,11 @@
 import {Component, Input, OnDestroy, OnInit, EventEmitter, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Subscription} from "rxjs";
+
 
 
 import {TaskService} from "../../shared/services/task.service";
 import {AuthService} from "../../shared/services/auth.service";
-import {DataService} from "../../shared/services/data.service";
-import {AlertService} from "../../shared/services/alert.service";
+import {DateService} from "../../shared/services/date.service";
 import {Task} from "../../shared/interfaces";
 
 @Component({
@@ -15,17 +14,16 @@ import {Task} from "../../shared/interfaces";
   styleUrls: ['./modal-window.component.scss']
 })
 export class ModalWindowComponent implements OnInit, OnDestroy {
-  @Input() task:Task;
+  @Input() task: Task;
   form: FormGroup;
   taskTime: string;
 
-  @Output() onCreate:EventEmitter<Task>=new EventEmitter<Task>()
+  @Output() onCreate: EventEmitter<Task> = new EventEmitter<Task>()
 
   constructor(
     private taskService: TaskService,
     private auth: AuthService,
-    private dataService: DataService,
-
+    private dateService: DateService,
   ) {
   }
 
@@ -41,14 +39,15 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
   }
 
   close() {
-    this.taskService.showWindow();
+    this.taskService.toggleWindow();
   }
 
   submit() {
     const task = {
       time: this.form.value.time,
       text: this.form.value.text,
-      date: this.dataService.date$.value.format('DD-MM-YYYY')
+      date: this.dateService.date$.value.format('DD-MM-YYYY'),
+      id: this.task.id
     }
     this.onCreate.emit(task);
   }

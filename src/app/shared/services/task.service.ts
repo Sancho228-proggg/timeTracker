@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {catchError, map} from "rxjs/operators";
+import {catchError, map, tap} from "rxjs/operators";
 import * as moment from 'moment';
 
 import {FbCreateResponse,Task} from "../interfaces";
@@ -17,11 +17,11 @@ export class TaskService{
     ) {
   }
   isWindow:boolean=false;
-  showWindow():void{
+  toggleWindow():void{
     this.isWindow=!this.isWindow;
   }
   create(task:Task):Observable<Task>{
-    const id=this.auth.getLoaclaId;
+    const id=this.auth.getLocalId;
     return this.http.post<FbCreateResponse>(`${environment.fbDbUrl}/tasks/${id}/${task.date}.json`,task)
       .pipe(
         map(res=>{
@@ -29,8 +29,8 @@ export class TaskService{
         })
       )
   }
-  uppdate(task:Task,taskId:string):Observable<Task>{
-    const id=this.auth.getLoaclaId;
+  update(task:Task,taskId:string):Observable<Task>{
+    const id=this.auth.getLocalId;
     return this.http.put<FbCreateResponse>(`${environment.fbDbUrl}/tasks/${id}/${task.date}/${taskId}.json`,task)
       .pipe(
         map(res=>{
@@ -41,7 +41,7 @@ export class TaskService{
 
 
   getTask(date:moment.Moment):Observable<Task>{
-    const id=this.auth.getLoaclaId;
+    const id=this.auth.getLocalId;
     return this.http.get<Task>(`${environment.fbDbUrl}/tasks/${id}/${date.format('DD-MM-YYYY')}.json`)
       .pipe(
         map((task)=>{
@@ -61,8 +61,20 @@ export class TaskService{
       )
   }
 
+  getTasks(){
+    const id=this.auth.getLocalId;
+    return this.http.get(`${environment.fbDbUrl}/tasks/${id}.json`)
+      .pipe(
+        map(tasks=>{
+          let arr=Object.keys(tasks);;
+            return arr;
+        })
+      )
+
+  }
+
   remove(date:string):Observable<void>{
-    const id=this.auth.getLoaclaId;
+    const id=this.auth.getLocalId;
     return this.http.delete<void>(`${environment.fbDbUrl}/tasks/${id}/${date}.json`);
   }
   check(taskTimes:string []):number{

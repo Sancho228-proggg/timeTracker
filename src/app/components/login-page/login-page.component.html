@@ -1,6 +1,10 @@
 <form class='card' [formGroup]="form" (ngSubmit)="submit()">
   <h2>
-    Sign In
+    <span *ngIf="check;else signup">Sign In</span>
+    <ng-template #signup>
+      <span>Sign Up</span>
+    </ng-template>
+
   </h2>
   <div class="alert" *ngIf="authService.error$|async as error">
     {{error}}
@@ -30,6 +34,10 @@
 
   <button class="btn"
           type="submit"
-          [disabled]="form.invalid||isSumbitted"
-  >Sign In</button>
+          [disabled]="form.invalid||isSubmitted"
+  ><span *ngIf="check;else signup">Sign In</span>
+    <ng-template #signup>
+      <span>Sign Up</span>
+    </ng-template>
+  </button>
 </form>

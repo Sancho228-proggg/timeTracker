@@ -3,10 +3,8 @@ import * as moment from "moment";
 import {BehaviorSubject} from "rxjs";
 
 @Injectable({providedIn:'root'})
-export class DataService{
+export class DateService {
   public date$:BehaviorSubject<moment.Moment>=new BehaviorSubject<moment.Moment>(moment());
-
-
 
   changeData(dir:number){
     const value=this.date$.value.add(dir,'month');

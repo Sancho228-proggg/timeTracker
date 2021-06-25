@@ -3,7 +3,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {TaskService} from "../../shared/services/task.service";
 import {switchMap} from "rxjs/operators";
-import {DataService} from "../../shared/services/data.service";
+import {DateService} from "../../shared/services/date.service";
 import {Task} from "../../shared/interfaces";
 import {Subscription} from "rxjs";
 import {AlertService} from "../../shared/services/alert.service";
@@ -13,73 +13,77 @@ import {AlertService} from "../../shared/services/alert.service";
   templateUrl: './content-page.component.html',
   styleUrls: ['./content-page.component.scss']
 })
-export class ContentPageComponent implements OnInit,OnDestroy {
+export class ContentPageComponent implements OnInit, OnDestroy {
   task: Task;
   removeSub: Subscription;
+  tasks: string [] = [];
 
   constructor(
     public taskService: TaskService,
-    private dataService: DataService,
+    private dateService: DateService,
     private alert: AlertService
   ) {
   }
 
   ngOnInit(): void {
-    this.dataService.date$.pipe(
+    this.dateService.date$.pipe(
       switchMap(val => this.taskService.getTask(val))
     ).subscribe(
       (task) => {
         this.task = task;
       }
     )
+    this.taskService.getTasks().subscribe(
+      val => {
+        this.tasks = val;
+      }
+    )
+
   }
+
   ngOnDestroy() {
-    if(this.removeSub) {
+    if (this.removeSub) {
       this.removeSub.unsubscribe();
     }
   }
 
-  togleWindow() {
-    this.taskService.showWindow();
+  toggleWindow() {
+    this.taskService.toggleWindow();
   }
 
   remove(date: string) {
     this.removeSub = this.taskService.remove(date).subscribe();
+    this.tasks = this.tasks.filter(val => val !== date);
     this.alert.success('Задание было удалено');
-    this.task={
-      time:'',
-      text:'',
-      date:''
+    this.task = {
+      time: '',
+      text: '',
+      date: ''
     };
   }
 
-  create(task:Task){
-    if(!this.task.text){
+  create(task: Task) {
+    if (!this.task.text) {
       if (+task.time <= 24) {
-        this.taskService.create(task).subscribe((task) => {
-          if(task.id) {
-            localStorage.setItem('taskId', task.id);
-          }
-        });
-        this.taskService.showWindow();
+        this.taskService.create(task).subscribe();
+        this.tasks.push(task.date)
+        this.taskService.toggleWindow();
         this.alert.success('Задание было успешно добавлено');
-        this.task=task;
+        this.task = task;
       } else {
-        this.taskService.showWindow();
+        this.taskService.toggleWindow();
         this.alert.danger('Количество общих часов на день превышает 24');
       }
-    }
-   else{
-     if(+task.time<=24) {
-       const taskId:string=localStorage.getItem('taskId')||'';
-       this.taskService.uppdate(task,taskId).subscribe();
-       this.taskService.showWindow();
-       this.alert.success('Задание было успешно обновлено');
-       this.task=task;
-     }else{
-       this.taskService.showWindow();
-       this.alert.danger('Количество общих часов на день превышает 24');
-     }
+    } else {
+      if (+task.time <= 24) {
+        this.taskService.update(task, task.id || '').subscribe();
+        this.taskService.toggleWindow();
+        this.alert.success('Задание было успешно обновлено');
+        this.task = task;
+      } else {
+        this.taskService.toggleWindow();
+        this.alert.danger('Количество общих часов на день превышает 24');
+      }
 
     }
 

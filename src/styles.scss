@@ -1,4 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+:root {
+  --alert-color: #DC143C;
+  --dark-color: #8B0000;
+  --light-color: #f4f4f4;
+  --danger-color: #FF0000;
+  --success-color: #28a745;
+  --background-color:#FF7F50;
+  --button-color:#808080;
+  --button-disabled-color:#2F4F4F;
+}
 
 body{
   margin: 0;
@@ -7,7 +17,8 @@ body{
 }
 input{
   display: block;
-  width:100%;
+  width:80%;
+  margin: 0 auto;
   padding: 2px;
   font-size: 15px;
   border:1px solid black;
@@ -19,11 +30,11 @@ input{
   margin:0 auto;
   overflow: hidden;
   padding: 0 30px;
-  color:white;
+  color:var(--light-color);
 }
 .btn{
-  background-color:#808080;
-  color:#fff;
+  background-color:var(--button-color);
+  color:var(--light-color);
   height: 30px;
   width: 75px;
   border-radius:15px;
@@ -33,7 +44,7 @@ input{
   transition: background 400ms linear;
 
   &:disabled{
-    background: darkslategrey;
+    background: var( --button-disabled-color);
     cursor: not-allowed;
   }
   &:hover{
@@ -41,44 +52,45 @@ input{
   }
 }
 .card{
-  width: 500px;
-  margin:50px auto;
-  height: 350px;
-  background-color:#7B68EE;
+  display: inline-block;
+  position: absolute;
+  top: 20%;
+  left:30%;
+  background-color:var( --background-color);
   padding:20px;
   border-radius:25px;
 }
 .form-control{
+  width: 500px;
+  margin:25px auto;
   input{
-    width: 400px;
+    border-radius: 5px;
   }
-  margin-bottom: 25px;
   &.invalid{
     input{
-      border:1px solid red;
+      border:1px solid var(--alert-color);
     }
-
   }
 }
 .alert {
   padding: 0.7rem;
   margin: 1rem 0;
   opacity: 0.9;
-  background: #f4f4f4;
-  color: red;
+  background: var(--light-color);
+  color: var(--alert-color);
 }
 .alert-success{
-  background:  #28a745;
-  color: #fff;
+  background:  var(--success-color);
+  color: var(--light-color);
 }
 
 .alert-danger{
-  background:  #FF0000;
-  color: #fff;
+  background:  var(--danger-color);
+  color: var(--light-color);
 }
 .validation{
   font-weight: bold;
-  color: darkred;
+  color: var(--dark-color);
 }
 
 

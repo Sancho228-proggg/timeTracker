@@ -1,16 +1,16 @@
 <table>
   <thead>
-   <tr>
+  <tr>
 
-     <th>Mon</th>
-     <th>Tue</th>
-     <th>Wen</th>
-     <th>Thu</th>
-     <th>Fri</th>
-     <th>Sat</th>
-     <th>Sun</th>
+    <th>Mon</th>
+    <th>Tue</th>
+    <th>Wen</th>
+    <th>Thu</th>
+    <th>Fri</th>
+    <th>Sat</th>
+    <th>Sun</th>
 
-   </tr>
+  </tr>
   </thead>
   <tbody>
   <tr *ngFor="let week of calendar">
@@ -18,7 +18,7 @@
       <span
         [class.active]="day.active"
         [class.selected]="day.selected"
-      >{{day.value|moment:'D'}}</span>
+      >{{day.value|moment:'D'}}<sup *ngIf="day.withTask">*</sup></span>
     </td>
   </tr>
   </tbody>

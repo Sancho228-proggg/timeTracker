@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Observable, Subject, throwError} from "rxjs";
+import {Observable, of, Subject, throwError} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 
 import {FbAuthResponse, FbUserResponce, User} from "../interfaces";
@@ -11,8 +11,6 @@ import {environment} from "../../../environments/environment";
 @Injectable({providedIn:'root'})
 
 export class AuthService {
-
-
   get token(){
     const exprDate=localStorage.getItem('fb-token-exp')
     if(+(new Date())>Number(exprDate)){
@@ -23,21 +21,17 @@ export class AuthService {
     return localStorage.getItem('fb-token')
   }
   public error$:Subject<string>=new Subject<string>();
-  constructor(private http:HttpClient) {
-
-  }
+  constructor(private http:HttpClient) {}
 
 
   get getActiveUser():string|null{
     const activeUser=localStorage.getItem('active-user');
     return activeUser;
   }
-  get getLoaclaId():string|null{
+  get getLocalId():string|null{
     const localId=localStorage.getItem('local-id');
     return localId;
   }
-
-
   login(user:User):Observable<User>{
     user.returnSecureToken=true;
     return this.http.post<User>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,user)
@@ -61,6 +55,7 @@ export class AuthService {
   isAuth():boolean{
     return !!this.token;
   }
+
   private setToken(response:FbAuthResponse|null){
     if(response){
       const exprDate=new Date(( Date.now()+ +response.expiresIn*1000));
@@ -87,21 +82,47 @@ export class AuthService {
       case 'EMAIL_EXISTS':
         this.error$.next('Email занят')
         break;
+      case 'USER_NOT_FOUND':
+        this.error$.next('Введите данные')
+        break;
+      case 'INVALID_ID_TOKEN':
+        this.error$.next('Введите данные')
+        break;
 
     }
     return throwError(error)
 
   }
+  private handleErrorAuth(error:HttpErrorResponse){
+    const {message}=error.error.error;
+    switch (message) {
+      case 'INVALID_ID_TOKEN':
+        this.error$.next('Введите данные')
+        break;
 
-  getUserInfo(){
+    }
+    localStorage.clear();
+    return of(false);
 
+  }
+  getAuthInfo(){
     return this.http.post<FbUserResponce>(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${environment.apiKey}`,{idToken:this.token})
       .pipe(
         map((val)=>{
-          const user=val['users'][0];
-         return user;
+          const user=val.users[0];
+          const localId = localStorage.getItem('local-id');
+          if (user) {
+            if (localId === user.localId) {
+              return true;
+            } else {
+              localStorage.clear()
+              return false;
+            }
+          } else {
+            return false;
+          }
         }),
-        catchError(this.handleError.bind(this))
+        catchError(this.handleErrorAuth.bind(this))
       )
   }
 }

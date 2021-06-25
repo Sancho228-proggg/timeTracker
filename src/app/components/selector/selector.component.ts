@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import {DataService} from "../../shared/services/data.service";
+import {DateService} from "../../shared/services/date.service";
 
 
 @Component({
@@ -11,7 +11,7 @@ import {DataService} from "../../shared/services/data.service";
 })
 export class SelectorComponent implements OnInit {
 
-  constructor(public dataService:DataService) { }
+  constructor(public dataService:DateService) { }
   ngOnInit(): void {
 
   }
