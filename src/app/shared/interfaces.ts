@@ -9,7 +9,7 @@ export interface FbAuthResponse{
   localId?:string,
   email?:string
 }
-export interface FbUserResponce{
+export interface FbUserResponse{
   users:VerifiableUser[]
 }
 export interface VerifiableUser{

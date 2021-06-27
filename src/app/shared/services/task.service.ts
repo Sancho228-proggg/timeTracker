@@ -61,13 +61,18 @@ export class TaskService{
       )
   }
 
-  getTasks(){
+  getTasks():Observable<string []>{
     const id=this.auth.getLocalId;
-    return this.http.get(`${environment.fbDbUrl}/tasks/${id}.json`)
+    return this.http.get<string>(`${environment.fbDbUrl}/tasks/${id}.json`)
       .pipe(
         map(tasks=>{
-          let arr=Object.keys(tasks);;
+          if(!tasks){
+            return [];
+          }
+          else{
+            let arr=Object.keys(tasks);;
             return arr;
+          }
         })
       )
 

@@ -17,6 +17,7 @@ export class ContentPageComponent implements OnInit, OnDestroy {
   task: Task;
   removeSub: Subscription;
   tasks: string [] = [];
+  preloader:boolean=true;
 
   constructor(
     public taskService: TaskService,
@@ -36,6 +37,8 @@ export class ContentPageComponent implements OnInit, OnDestroy {
     this.taskService.getTasks().subscribe(
       val => {
         this.tasks = val;
+        this.preloader=false;
+        console.log(this.preloader);
       }
     )
 

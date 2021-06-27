@@ -3,7 +3,12 @@
     <app-selector></app-selector>
   </header>
   <main>
-    <app-calendar [tasks]="tasks"></app-calendar>
+    <div *ngIf="preloader;else content">
+      <p>Идёт загрузка...</p>
+    </div>
+    <ng-template #content>
+      <app-calendar [tasks]="tasks"></app-calendar>
+    </ng-template>
   </main>
   <div>
     <app-organiser [task]="task" (onRemove)="remove($event)"></app-organiser>

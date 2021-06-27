@@ -3,7 +3,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, of, Subject, throwError} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 
-import {FbAuthResponse, FbUserResponce, User} from "../interfaces";
+import {FbAuthResponse, FbUserResponse, User} from "../interfaces";
 import {environment} from "../../../environments/environment";
 
 
@@ -106,7 +106,7 @@ export class AuthService {
 
   }
   getAuthInfo(){
-    return this.http.post<FbUserResponce>(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${environment.apiKey}`,{idToken:this.token})
+    return this.http.post<FbUserResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${environment.apiKey}`,{idToken:this.token})
       .pipe(
         map((val)=>{
           const user=val.users[0];
