@@ -3,10 +3,7 @@ import * as moment from 'moment';
 
 
 import {DateService} from "../../shared/services/date.service";
-import {TaskService} from "../../shared/services/task.service";
-import {Task} from "../../shared/interfaces";
-import {Observable} from "rxjs";
-import {map, tap} from "rxjs/operators";
+
 
 
 interface Day {
@@ -14,7 +11,7 @@ interface Day {
   active: boolean
   disabled: boolean
   selected: boolean
-  withTask: boolean | Promise<boolean>
+  withTask: boolean
 }
 
 interface Week {

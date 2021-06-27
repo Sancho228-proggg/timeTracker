@@ -36,7 +36,7 @@ export class AuthService {
     user.returnSecureToken=true;
     return this.http.post<User>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,user)
       .pipe(
-        tap(this.setToken?this.setToken:console.error),
+        tap(this.setToken||console.error),
         catchError(this.handleError.bind(this))
       )
   }
@@ -44,7 +44,7 @@ export class AuthService {
     user.returnSecureToken=true;
     return this.http.post<User>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`,user)
       .pipe(
-        tap(this.setToken?this.setToken:console.error),
+        tap(this.setToken||console.error),
         catchError(this.handleError.bind(this))
       )
   }

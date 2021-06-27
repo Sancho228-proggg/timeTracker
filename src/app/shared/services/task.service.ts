@@ -53,7 +53,7 @@ export class TaskService{
             }
             return emptyTask;
           }else{
-            // @ts-ignore
+
             const tasks:Task[]=Object.keys(task).map((key)=>({...task[key],id:key}));
             return tasks[0];
           }
