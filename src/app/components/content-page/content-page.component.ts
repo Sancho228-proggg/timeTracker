@@ -38,7 +38,6 @@ export class ContentPageComponent implements OnInit, OnDestroy {
       val => {
         this.tasks = val;
         this.preloader=false;
-        console.log(this.preloader);
       }
     )
 

@@ -15,8 +15,9 @@ import {AlertService} from "../../shared/services/alert.service";
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
   isSubmitted: boolean = false;
-  check:boolean=true;
+  check: boolean = true;
   message: string = '';
+
   constructor(
     public authService: AuthService,
     private router: Router,
@@ -31,15 +32,13 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.route.params.subscribe(params=>{
-      if(params['stay']=='signin'){
-        this.check=true;
-      }
-      else{
-        this.check=false;
+    this.route.params.subscribe(params => {
+      if (params['stay'] == 'signin') {
+        this.check = true;
+      } else {
+        this.check = false;
       }
     })
-
 
 
     this.route.queryParams.subscribe((params: Params) => {
@@ -63,26 +62,27 @@ export class LoginPageComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     }
-  if(this.check){
-    this.authService.login(user).subscribe(() => {
-      this.form.reset();
-      this.alert.success('Вы успешно вошли');
-      this.router.navigate(['/contentPage']);
-      this.isSubmitted = false;
+    if (this.check) {
+      this.authService.login(user).subscribe(() => {
+        this.form.reset();
+        this.alert.success('Вы успешно вошли');
+        this.router.navigate(['/contentPage']);
+        this.isSubmitted = false;
 
-    }, () => {
-      this.isSubmitted = false;
-    })
+      }, () => {
+        this.isSubmitted = false;
+      })
 
-  }
-  else{
-    this.authService.signUp(user).subscribe(()=>{
-      this.form.reset();
-      this.alert.success('Вы успешно зарегистрировались');
-      this.router.navigate(['/contentPage']);
-      this.isSubmitted=false;
-    },()=>{this.isSubmitted=false;})
-  }
+    } else {
+      this.authService.signUp(user).subscribe(() => {
+        this.form.reset();
+        this.alert.success('Вы успешно зарегистрировались');
+        this.router.navigate(['/contentPage']);
+        this.isSubmitted = false;
+      }, () => {
+        this.isSubmitted = false;
+      })
+    }
 
   }
 

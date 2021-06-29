@@ -1,5 +1,6 @@
+@use 'src/variables' as v;
 .header{
-  background-color:#FF7F50;
+  background-color:v.$background-color;
   height: 80px;
   display:flex;
   align-items: center;

@@ -35,7 +35,6 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.dateService.date$.subscribe(this.generate.bind(this));
-
   }
 
   generate(now: moment.Moment) {

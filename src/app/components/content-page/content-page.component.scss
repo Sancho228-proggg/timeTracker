@@ -1,8 +1,9 @@
+@use 'src/variables' as v;
 .wrap {
   width: 600px;
   height: 460px;
   margin: 30px auto;
-  background: #FF7F50;
+  background: v.$background-color;
   border-radius: 15px;
   padding: 10px;
 
@@ -27,7 +28,7 @@
   top: 30%;
   left: 40%;
   width: 20%;
-  background: #ffffff;
+  background:v.$light-color;
   padding: 0;
 }
 

@@ -1,3 +1,4 @@
+@use './src/variables' as v;
 table {
   width: 600px;
   margin: 0 auto;
@@ -15,12 +16,12 @@ td {
 
 .active {
   font-weight: bold;
-  color: red;
+  color: v.$danger-color;
   font-size: 25px;
 }
 
 .selected {
-  color: black;
+  color: v.$black-color;
 }
 
 
