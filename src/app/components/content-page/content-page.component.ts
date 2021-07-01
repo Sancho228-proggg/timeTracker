@@ -17,7 +17,7 @@ export class ContentPageComponent implements OnInit, OnDestroy {
   task: Task;
   removeSub: Subscription;
   tasks: string [] = [];
-  preloader:boolean=true;
+  preloader: boolean = true;
 
   constructor(
     public taskService: TaskService,
@@ -37,7 +37,7 @@ export class ContentPageComponent implements OnInit, OnDestroy {
     this.taskService.getTasks().subscribe(
       val => {
         this.tasks = val;
-        this.preloader=false;
+        this.preloader = false;
       }
     )
 
@@ -67,18 +67,22 @@ export class ContentPageComponent implements OnInit, OnDestroy {
   create(task: Task) {
     if (!this.task.text) {
       if (+task.time <= 24) {
-        this.taskService.create(task).subscribe();
+        this.taskService.create(task).subscribe(
+          (task) => {
+            this.task = task;
+          }
+        );
         this.tasks.push(task.date)
         this.taskService.toggleWindow();
         this.alert.success('Задание было успешно добавлено');
-        this.task = task;
+
       } else {
         this.taskService.toggleWindow();
         this.alert.danger('Количество общих часов на день превышает 24');
       }
     } else {
       if (+task.time <= 24) {
-        this.taskService.update(task, task.id || '').subscribe();
+        this.taskService.update(task, task.id||'').subscribe();
         this.taskService.toggleWindow();
         this.alert.success('Задание было успешно обновлено');
         this.task = task;
