@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {catchError, map, tap} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import * as moment from 'moment';
 
 import {FbCreateResponse,Task} from "../interfaces";
@@ -16,10 +16,7 @@ export class TaskService{
     private auth:AuthService
     ) {
   }
-  isWindow:boolean=false;
-  toggleWindow():void{
-    this.isWindow=!this.isWindow;
-  }
+
   create(task:Task):Observable<Task>{
     const id=this.auth.getLocalId;
     return this.http.post<FbCreateResponse>(`${environment.fbDbUrl}/tasks/${id}/${task.date}.json`,task)

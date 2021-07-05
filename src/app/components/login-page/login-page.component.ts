@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 
@@ -22,8 +22,7 @@ export class LoginPageComponent implements OnInit {
     public authService: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private alert: AlertService,
-    public cd: ChangeDetectorRef
+    private alert: AlertService
   ) {
 
 

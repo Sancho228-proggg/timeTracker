@@ -18,8 +18,8 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
   form: FormGroup;
   taskTime: string;
 
-  @Output() onCreate: EventEmitter<Task> = new EventEmitter<Task>()
-
+  @Output() onCreate: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output() toggleWindow:EventEmitter<boolean>=new EventEmitter<boolean>();
   constructor(
     private taskService: TaskService,
     private auth: AuthService,
@@ -39,7 +39,7 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
   }
 
   close() {
-    this.taskService.toggleWindow();
+    this.toggleWindow.emit(false);
   }
 
   submit() {
@@ -50,6 +50,7 @@ export class ModalWindowComponent implements OnInit, OnDestroy {
       id: this.task.id
     }
     this.onCreate.emit(task);
+    this.toggleWindow.emit(false);
   }
 
 }

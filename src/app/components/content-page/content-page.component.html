@@ -13,10 +13,10 @@
   <div>
     <app-organiser [task]="task" (onRemove)="remove($event)"></app-organiser>
   </div>
-  <div *ngIf="taskService.isWindow" class="model_wrap">
-    <app-modal-window [task]="task" (onCreate)="create($event)"></app-modal-window>
+  <div *ngIf="stayWindow" class="model_wrap">
+    <app-modal-window [task]="task" (onCreate)="create($event)" (toggleWindow)="toggleWindow($event)"></app-modal-window>
   </div>
 
-  <button class="btn-add" (click)="toggleWindow()">Add</button>
+  <button class="btn-add" (click)="toggleWindow(true)">Add</button>
 </div>
 
