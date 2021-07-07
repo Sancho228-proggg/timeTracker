@@ -1,0 +1,15 @@
+.selector{
+  align-items: center;
+  display: flex;
+  font-size: 25px;
+  justify-content: center;
+  span{
+    margin: 0 32px;
+    text-align: center;
+    width: 220px;
+
+  }
+  i{
+    cursor: pointer;
+  }
+}

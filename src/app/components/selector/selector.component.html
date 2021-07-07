@@ -1,0 +1,5 @@
+<p class="selector">
+  <i (click)="go(-1)"><img src="/assets/images/left_arrow.png" alt=""></i>
+  <span>{{dataService.date$ | async | moment }}</span>
+  <i (click)="go(1)"><img src="/assets/images/right_arrow.png" alt=""></i>
+</p>

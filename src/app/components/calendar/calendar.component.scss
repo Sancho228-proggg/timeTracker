@@ -1,0 +1,26 @@
+table {
+  width: 600px;
+  margin: 0 auto;
+  border-spacing: 7px 11px;
+}
+
+td {
+  text-align: center;
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 50%;
+  }
+}
+
+.active {
+  font-weight: bold;
+  color: var(--danger-color);
+  font-size: 25px;
+}
+
+.selected {
+  color: var(--black-color);
+}
+
+

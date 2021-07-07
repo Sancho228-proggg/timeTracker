@@ -1,0 +1,101 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+:root{
+  --alert-color: #DC143C;
+  --dark-color: #8B0000;
+  --light-color: #f4f4f4;
+  --danger-color: #FF0000;
+  --success-color: #28a745;
+  --background-color:#FF7F50;
+  --button-color:#808080;
+  --button-disabled-color:#2F4F4F;
+  --black-color:#000000;
+  --text-color:#7B68EE;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+input{
+  display: block;
+  width:80%;
+  margin: 15px auto;
+  padding: 2px;
+  font-size: 15px;
+  border:1px solid var(--black-color);
+  outline:none;
+}
+.container{
+  max-width: 1100px;
+  margin:0 auto;
+  overflow: hidden;
+  padding: 0 30px;
+  color:var(--light-color);
+}
+.btn{
+  background-color:var(--button-color);
+  color:var(--light-color);
+  height: 30px;
+  width: 75px;
+  border-radius:15px;
+  border:none;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: background 400ms linear;
+
+  &:disabled{
+    background: var(--button-disabled-color);
+    cursor: not-allowed;
+  }
+  &:hover{
+    background: var(--black-color);
+  }
+}
+.card{
+  display: inline-block;
+  position: absolute;
+  top: 20%;
+  left:30%;
+  background-color:var(--background-color);
+  padding:20px;
+  border-radius:25px;
+  box-shadow: 5px 5px 15px var(--black-color);
+}
+.form-control{
+  width: 500px;
+  margin:25px auto;
+  input{
+    border-radius: 5px;
+  }
+  &.invalid{
+    input{
+      border:1px solid var(--alert-color);
+    }
+  }
+}
+.alert {
+  padding: 0.7rem;
+  margin: 1rem 0;
+  opacity: 0.9;
+  background: var(--light-color);
+  color: var(--alert-color);
+}
+.alert-success{
+  background:  var(--success-color);
+  color: var(--light-color);
+}
+
+.alert-danger{
+  background:  var(--danger-color);
+  color: var(--light-color);
+}
+.validation{
+  font-weight: bold;
+  color: var(--dark-color);
+}
+
+
+

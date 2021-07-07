@@ -1,0 +1,17 @@
+<app-alert></app-alert>
+<div class="header">
+  <div class="logo">
+    <img src="./assets/images/logo.png" class="logo" alt="">
+  </div>
+  <div class="userInfo" *ngIf="this.auth.isAuth();else controls">
+    <p>{{this.auth.getActiveUser}}</p>
+    <button class="btn" (click)="logout($event)">Logout</button>
+  </div>
+  <ng-template #controls>
+    <div class="controls">
+      <button class="btn" [routerLink]="['authorization', 'signin']">Sign in</button>
+      <button class="btn" [routerLink]="['authorization', 'signup']">Sign Up</button>
+    </div>
+  </ng-template>
+
+</div>

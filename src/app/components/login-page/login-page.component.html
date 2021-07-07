@@ -1,0 +1,43 @@
+<form class='card' [formGroup]="form" (ngSubmit)="submit()">
+  <h2>
+    <span *ngIf="check;else signup">Sign In</span>
+    <ng-template #signup>
+      <span>Sign Up</span>
+    </ng-template>
+
+  </h2>
+  <div class="alert" *ngIf="authService.error$|async as error">
+    {{error}}
+  </div>
+  <div class="alert " *ngIf="message">
+    {{message}}
+  </div>
+
+  <div class="form-control" [ngClass]="{invalid:form.controls['email'].touched && form.controls['email'].invalid}">
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email">
+    <div
+      *ngIf="form.controls['email'].touched && form.controls['email'].invalid"
+      class="validation">
+      <small *ngIf="form.controls['email'].errors?.email"> Неправильный формат</small>
+      <small *ngIf="form.controls['email'].errors?.required"> Поле email является обязательным</small>
+    </div>
+  </div>
+
+  <div class="form-control" [ngClass]="{invalid:form.controls['password'].touched && form.controls['email'].invalid}">
+    <label for="password">Пароль</label>
+    <input id="password" type="password" formControlName="password">
+    <div class="validation" *ngIf="form.controls['password'].touched && form.controls['password'].invalid">
+      <small>Пароль не валидный</small>
+    </div>
+  </div>
+
+  <button class="btn"
+          type="submit"
+          [disabled]="form.invalid||isSubmitted"
+  ><span *ngIf="check;else signup">Sign In</span>
+    <ng-template #signup>
+      <span>Sign Up</span>
+    </ng-template>
+  </button>
+</form>

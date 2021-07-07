@@ -1,0 +1,29 @@
+.card_model{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  color:var(--text-color);
+  background-color: var(--light-color);
+  border:1px solid var(--black-color);
+  box-shadow: 5px 5px 15px var(--black-color);
+  display: inline-block;
+  border-radius:25px;
+  padding:20px;
+}
+.form-control-modal{
+  input{
+    width: 80%;
+
+  }
+}
+.btn_close{
+  border:none;
+  background: var(--light-color);
+  margin-left: auto;
+  width: 5px;
+  display: block;
+  &:hover{
+    color: var(--danger-color);
+    cursor:pointer;
+  }
+}
